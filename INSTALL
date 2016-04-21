@@ -1,0 +1,15 @@
+On Unix,Linux system, simply launch  make in the current directory and
+the binaries should be in the local "bin" directory. After compilation
+you can launch 'make clean' to delete the temporary objects.
+
+You  need  the CFITSIO  library  for  spaddi  to work.  Hopefully  the
+installation script will figure out where  it is else you need to edit
+the 'Makefile' in the 'src' directory and modify the variable FITS_INC
+and FITS_LIB to reflect your system configuration.
+
+When the installation is done, launch spaddi with '-h' for the list of
+options.
+
+Enjoy,
+
+Bastien Aracil

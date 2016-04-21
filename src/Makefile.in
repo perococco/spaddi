@@ -1,0 +1,65 @@
+CC    = gcc
+ORIG  = .			# where the sources lie
+DEST  = .
+
+FITS_INC = %%FITSIO_INCLUDE_FLAG%%  # where fitsio.h lies
+FITS_LIB = %%FITSIO_LIB_FLAG%%      # where libcfitsio.a lies
+
+INCDIR = $(FITS_INC)
+LIBDIR = $(FITS_LIB) 
+BINDIR = ../bin
+#CFLAGS = -Wall -ggdb3  
+
+CFLAGS =  -O3 -Wall -Wno-format $(INCDIR)
+LDLIBS = -lcfitsio -lm $(LIBDIR)
+
+OBJ =  outstream.o table_tfits.o table_ascii.o table.o vector_sort.o vector_math.o vector.o memory_manager.o spline_nr.o utils.o
+
+all: $(BINDIR)/spaddi $(BINDIR)/tfits2ascii
+
+utils.o : utils.c utils.h
+
+spline_nr.o : spline_nr.c spline_nr.h
+
+vector_yor.o : vector_yor.c vector_yor.h vector.h
+
+memory_manager.o : memory_manager.c memory_manager.h
+
+outstream.o : outstream.c outstream.h memory_manager.h
+
+rebin.o : rebin.c rebin.h vector.h
+
+vector.o : vector.c vector.h outstream.h memory_manager.h
+
+vector_sort.o : vector_sort.c vector_sort.h vector.h
+
+vector_math.o : vector_math.c vector_math.h vector.h
+
+table.o : table.c table.h memory_manager.h
+
+table_tfits.o : table_tfits.c table_tfits.h table.h memory_manager.h
+
+table_ascii.o : table_ascii.c table_ascii.h table.h memory_manager.h
+
+spectrum.o : spectrum.c spectrum.h
+
+astro.o : astro.c astro.h vector.h
+
+$(BINDIR)/tfits2ascii : tfits2ascii.o $(OBJ)
+	$(CC) $(CFLAGS)  tfits2ascii.o $(OBJ) $(LDLIBS) -o $@
+	strip $(BINDIR)/tfits2ascii
+
+$(BINDIR)/spaddi : spaddi.o rebin.o outstream.o memory_manager.o vector.o table_tfits.o spectrum.o \
+	table.o astro.o vector_math.o vector_sort.o spline_nr.o utils.o
+	$(CC) $(CFLAGS) spaddi.o outstream.o memory_manager.o \
+	vector.o table_tfits.o spectrum.o  $(LDLIBS)  table.o \
+	rebin.o astro.o vector_math.o vector_sort.o spline_nr.o utils.o -o $@ 
+	strip $(BINDIR)/spaddi
+clean::
+	rm -f *.o
+
+clean_all:: clean
+	rm -f $(BINDIR)/spaddi $(BINDIR)/tfits2ascii
+	rm Makefile
+
+
