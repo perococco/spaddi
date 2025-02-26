@@ -16,7 +16,7 @@
 void writeTAscii(TB_table tbin,char* filename,VC_vector which,int prec)
 {
   FILE* stream;
-  size_t i,j,jj,nbc,nbr;
+  size_t i,j,nbc,nbr;
 
 
   if(strcmp(filename,"-"))
@@ -35,7 +35,6 @@ void writeTAscii(TB_table tbin,char* filename,VC_vector which,int prec)
   for(i=0;i<nbr;i++)
     for(j=0;j<nbc;j++)
       {
-	jj=(which)?which->ldata[j]:j;
 	fprintf(stream,"%.*f%1s",prec,tbin->data[j]->ddata[i],((j==(nbc-1))?"\n":" "));
       }
   fclose(stream);

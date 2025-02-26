@@ -1,5 +1,5 @@
 all:
-	cd src && config.sh && make all
+	cd src && ./config.sh && make all
 
 clean:
 	cd src && test -e Makefile && make clean

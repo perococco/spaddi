@@ -113,7 +113,7 @@ VC_vector _VC_rebinl(VC_vector viny,VC_vector vinx,VC_vector voutx,VC_vector* vo
 {
   size_t i,j,szout,szin;
   size_t idmin,idmax;
-  double *dyin,*dxin,*dxout,*dyout;
+  double *dyin,*dxin,*dxout;
   double coef,x0,y0,x1,y1;
   double xmin,xmax,tmp;
   double cmin,cmax;
@@ -127,8 +127,7 @@ VC_vector _VC_rebinl(VC_vector viny,VC_vector vinx,VC_vector voutx,VC_vector* vo
       dxin =vinx->ddata;
       dyin =viny->ddata;
       dxout=voutx->ddata;
-      dyout=rslt->ddata;
-      
+
       szin =vinx->size;
       szout=voutx->size;
 

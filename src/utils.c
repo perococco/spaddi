@@ -10,7 +10,7 @@
 int wordCount(char* filename,long* nbl,long* nbw,long* nbc)
 {
   long  nlgn,nwrd,nchr;
-  int   spc,tab,nwl,strl,strw,rchr;
+  int   spc,tab,nwl,strw,rchr;
   FILE *fstrm;
 
   if((fstrm=fopen(filename,"r"))==NULL) return 1;
@@ -19,7 +19,6 @@ int wordCount(char* filename,long* nbl,long* nbw,long* nbc)
   spc=(int)' ';
   tab=(int)'\t';
   nwl=(int)'\n';
-  strl=0;
   strw=0;
   while(1)
     {

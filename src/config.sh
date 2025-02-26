@@ -3,7 +3,9 @@
 test_include_folders="/ /usr/include /usr/local/include /sw/include"
 test_lib_folders="/ /usr/lib /usr/local/lib /sw/lib"
 
-cat >tst.c  <<EOF
+mkdir -p "../bin"
+
+cat > tst.c  <<EOF
 #include <fitsio.h>
 int main(int argc,char** argv) {
 return 0;
@@ -21,8 +23,8 @@ for i in $test_include_folders; do
     status=`gcc ${inc_flag} tst.c -o tst.exe ; echo $?`
 
     if test $status -eq 0; then
-	FITSIO_INC_FLAG=$inc_flag
-	break
+	    FITSIO_INC_FLAG=$inc_flag
+	    break
     fi
 done
 rm -f tst.c tst.exe
@@ -50,7 +52,7 @@ for i in $test_lib_folders;do
 
     if test $status -eq 0; then
 	FITSIO_LIB_FLAG=$lib_flag
-	VERSION=`tst.exe`
+	VERSION=$(./tst.exe)
 	break
     fi
 done

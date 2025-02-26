@@ -249,7 +249,7 @@ VC_vector _addiScaleFactors(SP_spectrum* spectra,size_t nbsp,double width,VC_vec
 
 VC_vector _mergeScaleFactors(SP_spectrum* spectra,size_t nbsp,long width,VC_vector* vout,char* file,size_t line)
 {
-  size_t    i,j,k,sz,msz,swork,i1,i2;
+  size_t    i,j,k,sz,msz,i1,i2;
   double    *df1,*dw1,*df2,*dw2,*work;
   VC_vector rslt,idmin,idmax,sidx;
   size_t    spref,r1min,r1max,r2min,r2max;
@@ -277,7 +277,6 @@ VC_vector _mergeScaleFactors(SP_spectrum* spectra,size_t nbsp,long width,VC_vect
 	      if(sz>msz) msz=sz;
 	    }
 	  work=(double*)MM_malloc(msz*sizeof(double));
-	  swork=0;
 	  /****************************************/
 	  /*First find the limits of each spectrum*/
 	  /****************************************/
